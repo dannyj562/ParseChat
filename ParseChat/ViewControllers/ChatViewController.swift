@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Parse
 
 class ChatViewController: UIViewController {
-
+    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -21,7 +24,19 @@ class ChatViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func sendMessageToServer(_ sender: UIButton) {
+        let chatMessage = PFObject(className: "Message")
+        chatMessage["text"] = messageTextField.text ?? ""
+        chatMessage.saveInBackground { (success, error) in
+            if success {
+                print("The message was saved!")
+            } else if let error = error {
+                print("Problem saving message: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 

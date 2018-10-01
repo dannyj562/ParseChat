@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         if (!(usernameTextField.text?.isEmpty)! &&
             !(passwordTextField.text?.isEmpty)!) {
             registerUser()
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
         } else {
             showAlertDialogMessage(title: LoginViewController.invalidEntryTitle, message: LoginViewController.invalidEntryMessage)
         }
