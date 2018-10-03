@@ -11,10 +11,17 @@ import UIKit
 class ChatCell: UITableViewCell {
 
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     var message: String! {
         didSet {
             messageLabel.text = message
+        }
+    }
+    
+    var username: String! {
+        didSet {
+            usernameLabel.text = username
         }
     }
     override func awakeFromNib() {

@@ -97,29 +97,40 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" rowHeight="49" id="RXM-aP-FGb" customClass="ChatCell" customModule="ParseChat">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="49"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" rowHeight="95" id="RXM-aP-FGb" customClass="ChatCell" customModule="ParseChat">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RXM-aP-FGb" id="PE4-86-dZB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-Ri-Rag">
-                                                    <rect key="frame" x="8" y="8" width="359" height="32.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-Ri-Rag">
+                                                    <rect key="frame" x="8" y="36.5" width="359" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0F-2z-b8H">
+                                                    <rect key="frame" x="8" y="8" width="359" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="top" secondItem="PE4-86-dZB" secondAttribute="top" constant="8" id="6LF-1d-ZfM"/>
-                                                <constraint firstAttribute="bottom" secondItem="qM4-Ri-Rag" secondAttribute="bottom" constant="8" id="gU0-Qe-3IW"/>
-                                                <constraint firstAttribute="trailing" secondItem="qM4-Ri-Rag" secondAttribute="trailing" constant="8" id="yhH-zU-5Om"/>
-                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="leading" secondItem="PE4-86-dZB" secondAttribute="leading" constant="8" id="zls-XY-BZ3"/>
+                                                <constraint firstAttribute="bottom" secondItem="qM4-Ri-Rag" secondAttribute="bottom" constant="8" id="1b5-fI-R66"/>
+                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="top" secondItem="c0F-2z-b8H" secondAttribute="bottom" constant="8" id="ESo-cX-Gvz"/>
+                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="top" secondItem="c0F-2z-b8H" secondAttribute="bottom" constant="8" id="FAB-vP-p2R"/>
+                                                <constraint firstItem="c0F-2z-b8H" firstAttribute="top" secondItem="PE4-86-dZB" secondAttribute="top" constant="8" id="P69-vn-VQz"/>
+                                                <constraint firstAttribute="trailing" secondItem="qM4-Ri-Rag" secondAttribute="trailing" constant="8" id="fKo-4X-OXS"/>
+                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="leading" secondItem="PE4-86-dZB" secondAttribute="leading" constant="8" id="hmH-Pf-RMc"/>
+                                                <constraint firstItem="c0F-2z-b8H" firstAttribute="leading" secondItem="PE4-86-dZB" secondAttribute="leading" constant="8" id="tlX-ep-cBT"/>
+                                                <constraint firstAttribute="trailing" secondItem="c0F-2z-b8H" secondAttribute="trailing" constant="8" id="wDZ-ol-DDm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageLabel" destination="qM4-Ri-Rag" id="5m3-CS-tdp"/>
+                                            <outlet property="usernameLabel" destination="c0F-2z-b8H" id="tVL-LE-LpU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
