@@ -104,14 +104,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-Ri-Rag">
-                                                    <rect key="frame" x="15" y="11" width="345" height="23"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-Ri-Rag">
+                                                    <rect key="frame" x="8" y="8" width="359" height="32.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="top" secondItem="PE4-86-dZB" secondAttribute="top" constant="8" id="6LF-1d-ZfM"/>
+                                                <constraint firstAttribute="bottom" secondItem="qM4-Ri-Rag" secondAttribute="bottom" constant="8" id="gU0-Qe-3IW"/>
+                                                <constraint firstAttribute="trailing" secondItem="qM4-Ri-Rag" secondAttribute="trailing" constant="8" id="yhH-zU-5Om"/>
+                                                <constraint firstItem="qM4-Ri-Rag" firstAttribute="leading" secondItem="PE4-86-dZB" secondAttribute="leading" constant="8" id="zls-XY-BZ3"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageLabel" destination="qM4-Ri-Rag" id="5m3-CS-tdp"/>

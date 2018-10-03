@@ -20,6 +20,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        // Auto size row height based on cell autolayout constraints
+        tableView.rowHeight = UITableViewAutomaticDimension
+        // Provide an estimated row height. Used for calculating scroll indicator
+        tableView.estimatedRowHeight = 50
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer: Timer) in
             self.fetchNetworkRequest()
         }
@@ -53,9 +57,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
-        for message in messages {
-            cell.messageLabel.text = message["text"] as? String
-        }
+        cell.message = messages[indexPath.row]["text"] as? String ?? ""
         return cell
     }
     
@@ -75,6 +77,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             print(object["text"] )
                             //print(object["user"] )
                         //}
+                        
                     }
                 }
                 self.messages = objects!
@@ -94,37 +97,5 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-     
-     
-     
-     
-     
-     
-     query.findObjectsInBackground {
-     (objects: [PFObject]?, error: Error?) -> Void in
-     if error == nil {
-     // The find succeeded.
-     print("Successfully retrieved \(objects!.count) scores.")
-     // Do something with the found objects
-     if let objects = objects {
-     for object in objects {
-     if nil != object {
-     print(object["text"] ?? "")
-     print(object["user"] ?? "")
-     cell.message = object["text"] as! String
-     }
-     }
-     }
-     //self.messages = objects!
-     self.tableView.reloadData()
-     } else {
-     // Log details of the failure
-     print("Error: \(error!) \(error!.localizedDescription)")
-     }
-     
-     cell.message = self.messages[indexPath.row]["text"] as? String ?? ""
-     return cell
-     }
     */
-
 }
