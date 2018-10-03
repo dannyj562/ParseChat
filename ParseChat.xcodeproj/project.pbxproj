@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		300B8B202161D769001697CA /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B8B1F2161D769001697CA /* ChatViewController.swift */; };
+		300B8B232161E2AF001697CA /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300B8B222161E2AF001697CA /* ChatCell.swift */; };
 		30825124216178BC00106C5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30825123216178BC00106C5F /* AppDelegate.swift */; };
 		30825129216178BC00106C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30825127216178BC00106C5F /* Main.storyboard */; };
 		3082512B216178BF00106C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3082512A216178BF00106C5F /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		300B8B1F2161D769001697CA /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		300B8B222161E2AF001697CA /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		30825120216178BC00106C5F /* ParseChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParseChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30825123216178BC00106C5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30825128216178BC00106C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300B8B212161E281001697CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				300B8B222161E2AF001697CA /* ChatCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		30825117216178BC00106C5F = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 		30825122216178BC00106C5F /* ParseChat */ = {
 			isa = PBXGroup;
 			children = (
+				300B8B212161E281001697CA /* Views */,
 				30FDB98621618ED900DACB19 /* ViewControllers */,
 				30825123216178BC00106C5F /* AppDelegate.swift */,
 				30825127216178BC00106C5F /* Main.storyboard */,
@@ -389,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30F9F51A2161B91F002F6411 /* LoginViewController.swift in Sources */,
+				300B8B232161E2AF001697CA /* ChatCell.swift in Sources */,
 				300B8B202161D769001697CA /* ChatViewController.swift in Sources */,
 				30825124216178BC00106C5F /* AppDelegate.swift in Sources */,
 			);

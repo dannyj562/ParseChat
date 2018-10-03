@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -29,25 +28,50 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onSignUpClicked(_ sender: UIButton) {
-        if (!(usernameTextField.text?.isEmpty)! &&
-            !(passwordTextField.text?.isEmpty)!) {
-            registerUser()
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        } else {
+    @IBAction func onSignUpClicked(_ sender: Any) {
+        let user = PFUser()
+        user.username = usernameTextField.text ?? ""
+        user.password = passwordTextField.text ?? ""
+        
+        user.signUpInBackground { (success: Bool, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+                self.showAlertDialogMessage(title: LoginViewController.invalidNetworkRegistrationTitle, message: LoginViewController.invalidNetworkRegistrationMessage)
+            } else {
+                print("User Registered successfully")
+                print("Username: \(user.username!) \n")
+                print("Authentication value: \(user.isAuthenticated) \n")
+                print("User Token: \(user.sessionToken!) \n")
+                // manually segue to logged in view
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
+    }
+    @IBAction func onLoginClicked(_ sender: Any) {
+        let username = usernameTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        
+        if ((usernameTextField.text?.isEmpty)! &&
+            (passwordTextField.text?.isEmpty)!) {
             showAlertDialogMessage(title: LoginViewController.invalidEntryTitle, message: LoginViewController.invalidEntryMessage)
+        } else {
+            PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
+                if user != nil {
+                    // TODO: go to home screen
+                    NSLog("Successfully logged in.")
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                } else {
+                    self.showAlertDialogMessage(title: LoginViewController.invalidNetworkRegistrationTitle, message: LoginViewController.invalidNetworkRegistrationMessage)
+                }
+            }
         }
     }
     
-    @IBAction func onLoginClicked(_ sender: UIButton) {
-        if (!(usernameTextField.text?.isEmpty)! &&
-            !(passwordTextField.text?.isEmpty)!) {
-            loginUser()
-        } else {
-            showAlertDialogMessage(title: LoginViewController.invalidEntryTitle, message: LoginViewController.invalidEntryMessage)
-        }
-    }
-    
+    /*
+    *   Shows Alert Dialog Message when user does not signup or sign in correctly
+    *   @param title - The title from the Alert Dialog
+    *   @param message - The message from the Alert Dialog
+    */
     func showAlertDialogMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // create an OK action
@@ -57,39 +81,6 @@ class LoginViewController: UIViewController {
         // add the OK action to the alert controller
         alertController.addAction(OKAction)
         present(alertController, animated: true)
-    }
-    
-    func registerUser() {
-        let newUser = PFUser()
-        newUser.username = usernameTextField.text
-        newUser.password = usernameTextField.text
-        
-        // call sign up function on the object
-        newUser.signUpInBackground { (success: Bool, error: Error?) in
-            if let error = error {
-                print(error.localizedDescription)
-                self.showAlertDialogMessage(title: LoginViewController.invalidNetworkRegistrationTitle, message: LoginViewController.invalidNetworkRegistrationMessage)
-                
-            } else {
-                print("User Registered successfully")
-                // manually segue to logged in view
-            }
-        }
-    }
-    
-    func loginUser() {
-        let username = usernameTextField.text ?? ""
-        let password = passwordTextField.text ?? ""
-        
-        PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
-            if let error = error {
-                print("User log in failed: \(error.localizedDescription)")
-                self.showAlertDialogMessage(title: LoginViewController.invalidNetworkRegistrationTitle, message: LoginViewController.invalidNetworkRegistrationMessage)
-            } else {
-                print("User logged in successfully")
-                // display view controller that needs to shown after successful login
-            }
-        }
     }
     
     /*

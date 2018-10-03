@@ -9,16 +9,23 @@
 import UIKit
 import Parse
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var messages: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.dataSource = self
+        tableView.delegate = self
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer: Timer) in
+            self.fetchNetworkRequest()
+        }
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -27,15 +34,57 @@ class ChatViewController: UIViewController {
     @IBAction func sendMessageToServer(_ sender: UIButton) {
         let chatMessage = PFObject(className: "Message")
         chatMessage["text"] = messageTextField.text ?? ""
-        chatMessage.saveInBackground { (success, error) in
-            if success {
+        chatMessage["user"] = PFUser.current()
+
+        chatMessage.saveInBackground {
+            (success: Bool, error: Error?) -> Void in
+            if (success) {
+                NSLog("Message sent")
                 print("The message was saved!")
-            } else if let error = error {
-                print("Problem saving message: \(error.localizedDescription)")
+            } else {
+                print("Problem saving message: \(String(describing: error?.localizedDescription))")
             }
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
+        for message in messages {
+            cell.messageLabel.text = message["text"] as? String
+        }
+        return cell
+    }
+    
+    func fetchNetworkRequest() {
+        let query = PFQuery(className:"Message")
+        query.order(byDescending: "createdAt")
+        query.includeKey("user")
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) scores.")
+                // Do something with the found objects
+                if let objects = objects {
+                    for object in objects {
+                        //if nil != object {
+                            print(object["text"] )
+                            //print(object["user"] )
+                        //}
+                    }
+                }
+                self.messages = objects!
+                self.tableView.reloadData()
+            } else {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.localizedDescription)")
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -45,6 +94,37 @@ class ChatViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+     
+     
+     
+     
+     
+     
+     query.findObjectsInBackground {
+     (objects: [PFObject]?, error: Error?) -> Void in
+     if error == nil {
+     // The find succeeded.
+     print("Successfully retrieved \(objects!.count) scores.")
+     // Do something with the found objects
+     if let objects = objects {
+     for object in objects {
+     if nil != object {
+     print(object["text"] ?? "")
+     print(object["user"] ?? "")
+     cell.message = object["text"] as! String
+     }
+     }
+     }
+     //self.messages = objects!
+     self.tableView.reloadData()
+     } else {
+     // Log details of the failure
+     print("Error: \(error!) \(error!.localizedDescription)")
+     }
+     
+     cell.message = self.messages[indexPath.row]["text"] as? String ?? ""
+     return cell
+     }
     */
 
 }
