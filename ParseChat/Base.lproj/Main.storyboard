@@ -72,7 +72,7 @@
         <!--Chat-->
         <scene sceneID="wpK-Wt-a4Z">
             <objects>
-                <viewController id="nH5-Rg-PrM" customClass="ChatViewController" customModule="ParseChat" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="nH5-Rg-PrM" customClass="ChatViewController" customModule="ParseChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ynL-gC-Uvq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
